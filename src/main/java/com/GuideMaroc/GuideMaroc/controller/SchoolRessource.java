@@ -1,5 +1,6 @@
 package com.GuideMaroc.GuideMaroc.controller;
 
+import com.GuideMaroc.GuideMaroc.Model.Branch;
 import com.GuideMaroc.GuideMaroc.Model.School;
 import com.GuideMaroc.GuideMaroc.Model.Street;
 import com.GuideMaroc.GuideMaroc.Service.SchoolService;
@@ -32,10 +33,10 @@ public class SchoolRessource {
         List<School> employees = schoolService.findAllSchools();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
-    /*@GetMapping("/branches")
-    public ResponseEntity<List<Branch>> getAllBranches() {
+    @GetMapping("/branches")
+    public ResponseEntity<List<Branch>>getAllBranches() {
         List<Branch> branches = schoolService.findAllBranchs();
         //System.out.println(branches);
         return new ResponseEntity<>(branches, HttpStatus.OK);
-    }*/
+    }
 }
