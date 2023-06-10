@@ -1,6 +1,7 @@
 package com.GuideMaroc.GuideMaroc.Model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -8,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id_branch")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "branchId")
 public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_branch;
+    private long branchId;
     private String name;
     private String type_formation;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -21,10 +22,11 @@ public class Branch {
             joinColumns =@JoinColumn(name="branch_id"),
             inverseJoinColumns = @JoinColumn(name="school_id")
     )
+    @JsonIgnore
     private List<School> schools=new ArrayList<>();
 
-    public Branch(long id_branch, String name, String type_formation, List<School> schools) {
-        this.id_branch = id_branch;
+    public Branch(long branchId, String name, String type_formation, List<School> schools) {
+        this.branchId = branchId;
         this.name = name;
         this.type_formation = type_formation;
         this.schools = schools;
@@ -33,12 +35,12 @@ public class Branch {
     public Branch() {
     }
 
-    public long getId_branch() {
-        return id_branch;
+    public long getbranchId() {
+        return branchId;
     }
 
-    public void setId_branch(long id_branch) {
-        this.id_branch = id_branch;
+    public void setbranchId(long branchId) {
+        this.branchId = branchId;
     }
 
     public String getName() {
@@ -68,7 +70,7 @@ public class Branch {
     @Override
     public String toString() {
         return "Branch{" +
-                "id_branch=" + id_branch +
+                "branchId=" + branchId +
                 ", name='" + name + '\'' +
                 ", type_formation='" + type_formation + '\'' +
                 ", schools=" + schools +

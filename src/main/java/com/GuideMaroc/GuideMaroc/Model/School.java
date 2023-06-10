@@ -2,6 +2,7 @@ package com.GuideMaroc.GuideMaroc.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -23,16 +24,18 @@ public class School implements Serializable {
     private String site;
     private String sector;
     @ManyToMany(mappedBy = "schools", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Branch> branches=new ArrayList<>();
     private String ImageUrl;
     @ManyToOne
-    @JoinColumn(name = "id_street")
-    private Street street_id;
+    @JoinColumn(name = "StreetId")
+    @JsonIgnore
+    private Street streetId;
 
     public School() {
     }
 
-    public School(long id, String name, String adrress, String info, String phone, String site, String sector, List<Branch> branches, String imageUrl, Street street_id) {
+    public School(long id, String name, String adrress, String info, String phone, String site, String sector, List<Branch> branches, String imageUrl, Street streetId) {
         this.id = id;
         this.name = name;
         this.adrress = adrress;
@@ -42,10 +45,10 @@ public class School implements Serializable {
         this.sector = sector;
         this.branches = branches;
         ImageUrl = imageUrl;
-        this.street_id = street_id;
+        this.streetId = streetId;
     }
 
-    public School(String name, String adrress, String info, String phone, String site, String sector, List<Branch> branches, String imageUrl, Street street_id) {
+    public School(String name, String adrress, String info, String phone, String site, String sector, List<Branch> branches, String imageUrl, Street streetId) {
         this.name = name;
         this.adrress = adrress;
         this.info = info;
@@ -54,7 +57,7 @@ public class School implements Serializable {
         this.sector = sector;
         this.branches = branches;
         ImageUrl = imageUrl;
-        this.street_id = street_id;
+        this.streetId = streetId;
     }
 
     public long getId() {
@@ -129,12 +132,12 @@ public class School implements Serializable {
         ImageUrl = imageUrl;
     }
 
-    public Street getStreet_id() {
-        return street_id;
+    public Street getstreetId() {
+        return streetId;
     }
 
-    public void setStreet_id(Street street_id) {
-        this.street_id = street_id;
+    public void setstreetId(Street streetId) {
+        this.streetId = streetId;
     }
 
     @Override
@@ -149,7 +152,7 @@ public class School implements Serializable {
                 ", sector='" + sector + '\'' +
                 ", branches=" + branches +
                 ", ImageUrl='" + ImageUrl + '\'' +
-                ", street_id=" + street_id +
+                ", streetId=" + streetId +
                 '}';
     }
 }
